@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "elasticsearch-playground"
+version = "0.1.0"
+description = "Provides LangChain based tools to interact with ElasticSearch and allow the creation of ElasticSearch based agents"
+authors = ["Gil Fernandes <gil.fernandes@onepointltd.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+langchain = "^0.0.310"
+openai = "^0.28.1"
+elasticsearch = "^8.10.0"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
