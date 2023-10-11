@@ -39,6 +39,8 @@ class Config:
 
     langchain_verbose = os.getenv("LANGCHAIN_VERBOSE") == "true"
     aggs_limit = int(os.getenv("AGGS_LIMIT"))
+    token_limit = int(os.getenv("TOKEN_LIMIT"))
+    max_search_retries = int(os.getenv("MAX_SEARCH_RETRIES"))
 
 cfg = Config()
 

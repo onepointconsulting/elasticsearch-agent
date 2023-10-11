@@ -11,6 +11,7 @@ langchain = "^0.0.310"
 openai = "^0.28.1"
 elasticsearch = "^8.10.0"
 python-dotenv = "^1.0.0"
+tiktoken = "^0.5.1"
 
 
 [build-system]
