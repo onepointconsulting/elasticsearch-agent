@@ -7,7 +7,7 @@ from langchain.callbacks.manager import (
     CallbackManagerForToolRun,
 )
 
-from elasticsearch_playground.config import cfg
+from elasticsearch_agent.config import cfg
 from langchain.tools.base import BaseTool
 
 
@@ -56,7 +56,7 @@ class IndexDetailsTool(BaseTool):
     args_schema: Optional[Type[BaseModel]] = IndexDetailsInput
 
 if __name__ == "__main__":
-    from elasticsearch_playground.log_init import logger
+    from elasticsearch_agent.log_init import logger
 
     index_name = "socio_economic_indicators"
     tool = IndexDetailsTool()

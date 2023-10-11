@@ -6,7 +6,7 @@ from langchain.callbacks.manager import (
     AsyncCallbackManagerForToolRun
 )
 
-from elasticsearch_playground.config import cfg
+from elasticsearch_agent.config import cfg
 
 
 class ListIndicesInput(BaseModel):
@@ -42,7 +42,7 @@ class ListIndicesTool(BaseTool):
 
 
 if __name__ == "__main__":
-    from elasticsearch_playground.log_init import logger
+    from elasticsearch_agent.log_init import logger
 
     indices_tool = ListIndicesTool()
     logger.info(indices_tool(","))

@@ -3,11 +3,11 @@ from langchain.agents.agent import AgentExecutor
 from langchain.agents.agent_types import AgentType
 from langchain.prompts.chat import AIMessage, SystemMessage
 
-from elasticsearch_playground.config import cfg
-from elasticsearch_playground.tools.list_indices_tool import ListIndicesTool
-from elasticsearch_playground.tools.index_data_tool import IndexShowDataTool
-from elasticsearch_playground.tools.index_details_tool import IndexDetailsTool
-from elasticsearch_playground.tools.index_search_tool import create_search_tool
+from elasticsearch_agent.config import cfg
+from elasticsearch_agent.tools.list_indices_tool import ListIndicesTool
+from elasticsearch_agent.tools.index_data_tool import IndexShowDataTool
+from elasticsearch_agent.tools.index_details_tool import IndexDetailsTool
+from elasticsearch_agent.tools.index_search_tool import create_search_tool
 
 tools = [
     ListIndicesTool(),

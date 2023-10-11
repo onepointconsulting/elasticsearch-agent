@@ -8,8 +8,8 @@ from pydantic import BaseModel, Field
 
 from langchain.tools.base import BaseTool
 
-from elasticsearch_playground.log_init import logger
-from elasticsearch_playground.config import cfg
+from elasticsearch_agent.log_init import logger
+from elasticsearch_agent.config import cfg
 
 
 class IndexShowDataInput(BaseModel):

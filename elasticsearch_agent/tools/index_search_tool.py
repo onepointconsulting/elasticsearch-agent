@@ -2,8 +2,8 @@ import json
 
 from pydantic.v1 import BaseModel, Field  # <-- Uses v1 namespace
 
-from elasticsearch_playground.log_init import logger
-from elasticsearch_playground.config import cfg
+from elasticsearch_agent.log_init import logger
+from elasticsearch_agent.config import cfg
 
 from langchain.tools import StructuredTool
 
@@ -31,20 +31,35 @@ def elastic_search(
     size: int = cfg.elastic_index_data_size,
 ):
     """Executes a specific query on an index in ElasticSearch and returns all hits"""
+    size = min(cfg.elastic_index_data_max_size, size)
     try:
-        query_dict: dict = json.loads(query)
-        if "query" in query_dict:
-            query_dict = query_dict["query"]
+        full_dict: dict = json.loads(query)
+        query_dict = None
+        aggs_dict = None
+        if "query" in full_dict:
+            query_dict = full_dict["query"]
+        if "aggs" in full_dict:
+            aggs_dict = full_dict["aggs"]
+        if query_dict is None and aggs_dict is None:
+            # Assume that there is a query but that the query part was ommitted.
+            query_dict = full_dict
+        if query_dict is None and aggs_dict is not None:
+            # This is an aggregation query, therefore we suppress the hits here
+            size = cfg.aggs_limit
         logger.info(query)
         res = cfg.es.search(
             index=index_name,
             from_=from_,
             size=size,
             query=query_dict,
+            aggs=aggs_dict
         )
+        if query_dict is None and aggs_dict is not None:
+            # When a result has aggregations, just return that and ignore the rest
+            return str(res['aggregations'])
         return str(res['hits'])
     except Exception as e:        
-        logger.exception("Could not execute query")
+        logger.exception(f"Could not execute query {query}")
         msg = str(e)
         return msg
 

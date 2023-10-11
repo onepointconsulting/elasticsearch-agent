@@ -21,6 +21,7 @@ class Config:
 
     elastic_index_data_from = int(os.getenv("ELASTIC_INDEX_DATA_FROM"))
     elastic_index_data_size = int(os.getenv("ELASTIC_INDEX_DATA_SIZE"))
+    elastic_index_data_max_size = int(os.getenv("ELASTIC_INDEX_DATA_MAX_SIZE"))
 
     model = os.getenv("OPENAI_MODEL")
     request_timeout = int(os.getenv("REQUEST_TIMEOUT"))
@@ -37,11 +38,12 @@ class Config:
     )
 
     langchain_verbose = os.getenv("LANGCHAIN_VERBOSE") == "true"
+    aggs_limit = int(os.getenv("AGGS_LIMIT"))
 
 cfg = Config()
 
 if __name__ == "__main__":
-    from elasticsearch_playground.log_init import logger
+    from elasticsearch_agent.log_init import logger
 
     check_fields = [
         cfg.elastic_server,
