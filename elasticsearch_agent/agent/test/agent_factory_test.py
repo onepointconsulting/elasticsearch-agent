@@ -73,6 +73,10 @@ def test_list_all_european_countries_specific():
 def test_CO2_for_regions():
     execution_template("Can you list the CO2 emissions for 2020 for all regions?")
 
+
+def test_gni_for_Germany():
+    execution_template("Can you tell me the gross national income of Germany in 2015 and 2016?")
+
 import sys
 
 report_file = None
@@ -109,5 +113,6 @@ if __name__ == "__main__":
     # test_query_average_european_countries()
     # test_list_regions()
     # test_list_all_european_countries()
-    test_list_all_european_countries_specific()
+    # test_list_all_european_countries_specific()
     # test_CO2_for_regions()
+    test_gni_for_Germany()

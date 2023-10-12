@@ -64,7 +64,8 @@ def elastic_search(
             if query_dict is None and aggs_dict is not None:
                 # When a result has aggregations, just return that and ignore the rest
                 final_res = str(res['aggregations'])
-            final_res = str(res['hits'])
+            else:
+                final_res = str(res['hits'])
             tokens = encoding.encode(final_res)
             retries += 1
             if len(tokens) > cfg.token_limit:
@@ -83,14 +84,13 @@ def create_search_tool():
 
 
 if __name__ == "__main__":
-    index_name = "socio_economic_indicators"
+    index_name = "co2_production"
     tool = create_search_tool()
     res = tool.run(
         {
             "index_name": index_name,
-            "query": """{"term": {"region": "SA"}}""",
+            "query": """{"size": 0, "aggs" : { "regions" : { "terms" : { "field" : "region", "size": 100 } } } }""",
             "from_": 0,
             "size": 10,
         }
     )
-    logger.info(res)
