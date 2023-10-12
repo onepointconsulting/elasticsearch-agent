@@ -25,38 +25,18 @@ def agent_factory() -> AgentExecutor:
     )
 
 
-def agent_factory2(add_memory=False) -> AgentExecutor:
+def agent_factory2() -> AgentExecutor:
     from langchain.agents.openai_functions_agent.base import OpenAIFunctionsAgent
 
     tags_ = []
     agent = AgentType.OPENAI_FUNCTIONS
     tags_.append(agent.value if isinstance(agent, AgentType) else agent)
-    extra_prompt_messages = [
-        AIMessage(
-            content="I should look at the indices in the ElasticSearch cluster to see what indices I can query."
-        ),
-        AIMessage(
-            content="I should look at the index details to see which fields I can query."
-        )
-    ]
-    if add_memory:
-        extra_prompt_messages.append(HumanMessagePromptTemplate(
-            prompt=PromptTemplate(
-                template="""
-Previous messages: {chat_history}
-                                   
-""",
-                input_variables=["chat_history"],
-            )
-        ))
-    memory = ConversationBufferMemory(memory_key="chat_history") if add_memory else None
     agent_obj = OpenAIFunctionsAgent.from_llm_and_tools(
-        cfg.llm, tools, 
-        extra_prompt_messages=extra_prompt_messages, 
+        cfg.llm, tools,
         system_message=SystemMessage(content="You are a helpful AI ElasticSearch Expert Assistant")
     )
     return AgentExecutor.from_agent_and_tools(
-        agent=agent_obj, tools=tools, tags=tags_, verbose=cfg.langchain_verbose, memory=memory
+        agent=agent_obj, tools=tools, tags=tags_, verbose=cfg.langchain_verbose
     )
 
 

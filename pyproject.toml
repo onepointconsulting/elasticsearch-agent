@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "elasticsearch-agent"
-version = "0.1.5"
+version = "0.1.6"
 description = "Provides LangChain based tools to interact with ElasticSearch and allow the creation of ElasticSearch based agents"
 authors = ["Gil Fernandes <gil.fernandes@onepointltd.com>"]
 readme = "README.md"

@@ -77,6 +77,10 @@ def test_CO2_for_regions():
 def test_gni_for_Germany():
     execution_template("Can you tell me the gross national income of Germany in 2015 and 2016?")
 
+
+def test_regionswith_gni():
+    execution_template("Which are the regions mentioned for which you have gross national income per capita data?")
+
 import sys
 
 report_file = None
@@ -86,7 +90,14 @@ if len(sys.argv) > 1:
 
 
 def execution_template(question: str) -> str:
-    res = agent_executor.run(question)
+    res = agent_executor.run(f"""
+Make sure that you query first the indices in the ElasticSearch database.
+Make sure that after querying the indices you query the field names.
+
+                             
+Then answer this question:
+{question}
+""")
     logger.info(question)
     logger.info(res)
     if report_file is not None:
@@ -115,4 +126,5 @@ if __name__ == "__main__":
     # test_list_all_european_countries()
     # test_list_all_european_countries_specific()
     # test_CO2_for_regions()
-    test_gni_for_Germany()
+    # test_gni_for_Germany()
+    test_regionswith_gni()
