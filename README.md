@@ -49,3 +49,5 @@ AGGS_LIMIT=200
 TOKEN_LIMIT=6000
 MAX_SEARCH_RETRIES = 100
 ```
+
+Please note that the agent works best with ChatGPT 4.
