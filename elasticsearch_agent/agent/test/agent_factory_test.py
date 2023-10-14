@@ -1,7 +1,7 @@
-from elasticsearch_agent.agent.agent_factory import agent_factory2
+from elasticsearch_agent.agent.agent_factory import agent_factory
 from elasticsearch_agent.log_init import logger
 
-agent_executor = agent_factory2()
+agent_executor = agent_factory()
 
 
 def test_list_indices():
@@ -125,6 +125,6 @@ if __name__ == "__main__":
     # test_list_regions()
     # test_list_all_european_countries()
     # test_list_all_european_countries_specific()
-    # test_CO2_for_regions()
-    # test_gni_for_Germany()
+    test_CO2_for_regions()
+    test_gni_for_Germany()
     test_regionswith_gni()
