@@ -35,3 +35,4 @@ if __name__ == "__main__":
     prompt = agent_executor.agent.prompt
     print(prompt)
     print(type(agent_executor.agent.prompt))
+    
