@@ -9,6 +9,8 @@ from langchain.callbacks.manager import (
 
 from elasticsearch_agent.config import cfg
 from langchain.tools.base import BaseTool
+from elasticsearch_agent.log_init import logger
+
 
 
 class IndexDetailsInput(BaseModel):
@@ -56,8 +58,6 @@ class IndexDetailsTool(BaseTool):
     args_schema: Optional[Type[BaseModel]] = IndexDetailsInput
 
 if __name__ == "__main__":
-    from elasticsearch_agent.log_init import logger
-
     index_name = "socio_economic_indicators"
     tool = IndexDetailsTool()
     result = tool(index_name)

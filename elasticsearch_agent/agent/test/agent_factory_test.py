@@ -10,7 +10,7 @@ def test_list_indices():
 
 def test_list_count():
     execution_template(
-        "How many records are there in the socio_economic_indicators index?"
+        "How many records are there in the co2 production index?"
     )
 
 
@@ -21,7 +21,7 @@ def test_list_counts():
 
 
 def test_fields():
-    execution_template("Which are the fields of the socio_economic_indicators index?")
+    execution_template("Which are the fields of the gross national income index?")
 
 
 def test_query_austria():
@@ -50,23 +50,23 @@ def test_query_germany_vs_autria_vs_india():
 
 def test_query_average_european_countries():
     execution_template(
-        "Can you give me the average of CO2 production for all European countries based on the socio economic indicators for the year of 2019?"
+        "Can you give me the average of CO2 production for all European countries based on the co2 production index for the year of 2019?"
     )
 
 
 def test_list_regions():
-    execution_template("Can you list all regions in the socio economic indicators?")
+    execution_template("Can you list all regions in the co2 production index?")
 
 
 def test_list_all_european_countries():
     execution_template(
-        "Can you list all European countries in the in the socio economic indicators?"
+        "Can you list all European countries in the in the co2 production index?"
     )
 
 
 def test_list_all_european_countries_specific():
     execution_template(
-        "Can you list all countries in the ECA region in the socio economic indicators?"
+        "Can you list all countries in the ECA region in the co2 production index?"
     )
 
 
@@ -80,6 +80,9 @@ def test_gni_for_Germany():
 
 def test_regionswith_gni():
     execution_template("Which are the regions mentioned for which you have gross national income per capita data?")
+
+def test_highest_co2():
+    execution_template("Which is the country with the highest Co2 production in 2021?")
 
 import sys
 
@@ -113,18 +116,21 @@ Then answer this question:
 
 
 if __name__ == "__main__":
-    # test_list_indices()
-    # test_list_count()
-    # test_list_counts()
-    # test_fields()
-    # test_query_austria()
-    # test_query_germany()
-    # test_query_germany_vs_autria()
-    # test_query_germany_vs_autria_vs_india()
-    # test_query_average_european_countries()
-    # test_list_regions()
-    # test_list_all_european_countries()
-    # test_list_all_european_countries_specific()
+    # To test and pipe the result into a file, use:
+    # python.exe .\elasticsearch_agent\agent\test\agent_factory_test.py test_output.txt
+    test_list_indices()
+    test_list_count()
+    test_list_counts()
+    test_fields()
+    test_query_austria()
+    test_query_germany()
+    test_query_germany_vs_autria()
+    test_query_germany_vs_autria_vs_india()
+    test_query_average_european_countries()
+    test_list_regions()
+    test_list_all_european_countries()
+    test_list_all_european_countries_specific()
     test_CO2_for_regions()
     test_gni_for_Germany()
     test_regionswith_gni()
+    test_highest_co2()

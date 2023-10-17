@@ -32,18 +32,21 @@ def elastic_search(
     from_: int = cfg.elastic_index_data_from,
     size: int = cfg.elastic_index_data_size,
 ):
-    """Executes a specific query on an index in ElasticSearch and returns all hits"""
+    """Executes a specific query on an ElasticSearch index and returns all hits or aggregation results"""
     size = min(cfg.elastic_index_data_max_size, size)
     encoding = tiktoken.encoding_for_model(cfg.model)
     try:
         full_dict: dict = json.loads(query)
         query_dict = None
         aggs_dict = None
+        sort_dict = None
         if "query" in full_dict:
             query_dict = full_dict["query"]
         if "aggs" in full_dict:
             aggs_dict = full_dict["aggs"]
-        if query_dict is None and aggs_dict is None:
+        if "sort" in full_dict:
+            sort_dict = full_dict["sort"]
+        if query_dict is None and aggs_dict is None and sort_dict is None:
             # Assume that there is a query but that the query part was ommitted.
             query_dict = full_dict
         if query_dict is None and aggs_dict is not None:
@@ -59,7 +62,8 @@ def elastic_search(
                 from_=from_,
                 size=size,
                 query=query_dict,
-                aggs=aggs_dict
+                aggs=aggs_dict,
+                sort=sort_dict
             )
             if query_dict is None and aggs_dict is not None:
                 # When a result has aggregations, just return that and ignore the rest
